@@ -18,6 +18,32 @@ class Movie {
 }
 
 List<Movie> listMovie = [];
+List<Movie> listMovieForSerch = [
+  const Movie(
+      title: 'Platform',
+      inmageName: 'images/Platform.jpeg',
+      time: '04.12.2021',
+      descreaption:
+          'descreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsak'),
+  const Movie(
+      title: 'Loft',
+      inmageName: 'images/Loft.jpeg',
+      time: '04.12.2021',
+      descreaption:
+          'descreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsak'),
+  const Movie(
+      title: 'Finch',
+      inmageName: 'images/Finch.jpeg',
+      time: '04.12.2021',
+      descreaption:
+          'descreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsak'),
+  const Movie(
+      title: 'Kill Bill',
+      inmageName: 'images/image.jpeg',
+      time: '04.12.2021',
+      descreaption:
+          'descreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsak'),
+];
 
 class Films extends StatefulWidget {
   Films({Key? key}) : super(key: key);
@@ -27,6 +53,24 @@ class Films extends StatefulWidget {
 }
 
 class _FilmsState extends State<Films> {
+  final controllerOne = TextEditingController();
+  void setStateForSerch() {
+    if (controllerOne.text.isNotEmpty) {
+      listMovie = listMovieForSerch.where((Movie movie) {
+        return movie.title.toLowerCase().contains(controllerOne.text.toLowerCase());
+      }).toList();
+    } else {
+      listMovie = listMovieForSerch;
+    }
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    controllerOne.addListener(setStateForSerch);
+  }
+
   @override
   Widget build(
     BuildContext context,
@@ -34,8 +78,9 @@ class _FilmsState extends State<Films> {
     return Stack(
       children: [
         ListView.builder(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             itemCount: listMovie.length,
-            itemExtent: 163,
+            itemExtent: 180,
             itemBuilder: (BuildContext context, int index) {
               final movie = listMovie[index];
               return Padding(
@@ -102,7 +147,9 @@ class _FilmsState extends State<Films> {
                 ),
               );
             }),
-        SerchWidget(),
+        SerchWidget(
+          controllerOne: controllerOne,
+        ),
       ],
     );
   }
@@ -110,41 +157,15 @@ class _FilmsState extends State<Films> {
 
 class SerchWidget extends StatefulWidget {
   const SerchWidget({
+    required this.controllerOne,
     Key? key,
   }) : super(key: key);
-
+  final TextEditingController controllerOne;
   @override
   State<SerchWidget> createState() => _SerchWidgetState();
 }
 
 class _SerchWidgetState extends State<SerchWidget> {
-  List<Movie> listMovieForSerch = [
-    const Movie(
-        title: 'Heading',
-        inmageName: 'images/image.jpeg',
-        time: '04.12.2021',
-        descreaption:
-            'descreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsak'),
-    const Movie(
-        title: 'Mults',
-        inmageName: 'images/image.jpeg',
-        time: '04.12.2021',
-        descreaption:
-            'descreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsak'),
-    const Movie(
-        title: 'Titanik',
-        inmageName: 'images/image.jpeg',
-        time: '04.12.2021',
-        descreaption:
-            'descreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsak'),
-    const Movie(
-        title: 'Kill Bill',
-        inmageName: 'images/image.jpeg',
-        time: '04.12.2021',
-        descreaption:
-            'descreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsak'),
-  ];
-  final controllerOne = TextEditingController();
   final backgroundColorForSerch = Colors.transparent;
   bool enebleForSerch = false;
   Color? forSerching = null;
@@ -157,7 +178,7 @@ class _SerchWidgetState extends State<SerchWidget> {
       forSerching == Colors.black87
           ? forSerching = Colors.transparent
           : forSerching = Colors.black87;
-      controllerOne.clear();
+      widget.controllerOne.clear();
       hintText == null ? hintText = 'Serch' : hintText = null;
       forLable == null
           ? forLable = Row(
@@ -171,25 +192,7 @@ class _SerchWidgetState extends State<SerchWidget> {
               ],
             )
           : forLable = null;
-          
     });
-  }
-
-  void _serchMovies() {
-    if (controllerOne.text.isNotEmpty) {
-      listMovie = listMovieForSerch.where((Movie movie) {
-        return movie.title.contains(controllerOne.text);
-      }).toList();
-    } else {
-      listMovie = listMovieForSerch;
-    }
-    setState(() {});
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    controllerOne.addListener(_serchMovies);
   }
 
   @override
@@ -203,7 +206,7 @@ class _SerchWidgetState extends State<SerchWidget> {
             color: forSerching,
           ),
           child: TextField(
-            controller: controllerOne,
+            controller: widget.controllerOne,
             textAlign: TextAlign.center,
             cursorColor: Colors.white,
             decoration: InputDecoration(
