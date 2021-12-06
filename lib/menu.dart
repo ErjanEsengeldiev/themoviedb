@@ -39,8 +39,8 @@ class _MenuState extends State<Menu> {
         currentIndex: _currentIndex,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+            icon: Icon(Icons.list),
+            label: 'News',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.movie),

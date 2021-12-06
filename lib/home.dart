@@ -16,20 +16,20 @@ class News {
 
 final List<News> listNews = [
   const News(
-      title: 'Mortl Combat',
-      inmageName: 'images/image.jpeg',
+      title: 'Mulan Soon',
+      inmageName: 'images/Mulan.jpeg',
       time: '04.12.2021',
       descreaption:
           'descreaptionfsafdsaffsddescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdhfjkasdhfkdescreaptionfsafdsaffsddescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdhfjkasdhfkjshadlfhsadlfhsakjshadlfhsadlfhsak'),
   const News(
-      title: 'Mults',
-      inmageName: 'images/image.jpeg',
+      title: 'About Scarlet and Tors Relationship',
+      inmageName: 'images/Avabgers.jpeg',
       time: '04.12.2021',
       descreaption:
           'descreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsak'),
   const News(
       title: 'Titanik',
-      inmageName: 'images/image.jpeg',
+      inmageName: 'images/FilmNews.jpeg',
       time: '04.12.2021',
       descreaption:
           'descreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsak'),
@@ -57,7 +57,7 @@ class _HomeState extends State<Home> {
       children: [
         ListView.builder(
             itemCount: listNews.length,
-            itemExtent: 200,
+            itemExtent: 500,
             itemBuilder: (BuildContext context, int index) {
               final news = listNews[index];
               void viewNews() {
@@ -90,44 +90,45 @@ class _HomeState extends State<Home> {
                           )
                         ],
                       ),
-                      child: Row(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
+                          
                           Image(image: AssetImage(news.inmageName)),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Center(
-                                    child: Text(
-                                      news.title,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.fade,
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  Text(
-                                    news.descreaption,
-                                    maxLines: 3,
+                          Center(
+                                  child: Text(
+                                    news.title,
+                                    maxLines: 1,
                                     overflow: TextOverflow.fade,
-                                  ),
-                                  Container(
-                                    alignment: Alignment.centerRight,
-                                    child: Text(
-                                      news.time,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.fade,
-                                      style:
-                                          const TextStyle(color: Colors.grey),
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              mainAxisAlignment:
+                                  MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                
+                                Text(
+                                  news.descreaption,
+                                  maxLines: 3,
+                                  overflow: TextOverflow.fade,
+                                ),
+                                Container(
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    news.time,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.fade,
+                                    style:
+                                        const TextStyle(color: Colors.grey),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
@@ -160,7 +161,9 @@ class ViewNewsWidget extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title:Text(listNews[indexFromlist].title,),
+        title: Text(
+          listNews[indexFromlist].title,
+        ),
         centerTitle: true,
       ),
       backgroundColor: Colors.transparent,
@@ -171,14 +174,12 @@ class ViewNewsWidget extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              
               Image(
                 image: AssetImage(listNews[indexFromlist].inmageName),
               ),
               SizedBox(
                 height: 20,
               ),
-              
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
