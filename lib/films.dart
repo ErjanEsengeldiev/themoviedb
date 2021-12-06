@@ -68,6 +68,7 @@ class _FilmsState extends State<Films> {
   @override
   void initState() {
     super.initState();
+    setStateForSerch();
     controllerOne.addListener(setStateForSerch);
   }
 
