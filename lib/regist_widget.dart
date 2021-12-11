@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'menu.dart';
-
+//Виджет Регистарции
 class RegistWidget extends StatefulWidget {
   const RegistWidget({
     Key? key,
@@ -12,20 +11,17 @@ class RegistWidget extends StatefulWidget {
 }
 
 class _RegistWidgetState extends State<RegistWidget> {
-  
-  final List <User> listOfUsers=[User(login: 'admin',password: 'admin')];
-  
+  final List<User> listOfUsers = [User(login: 'admin', password: 'admin')];
+
   final controllerOne = TextEditingController(text: 'admin');
   final controllerTwo = TextEditingController(text: 'admin');
-  
 
-
-  void _login(){
+  void _login() {
     setState(() {
       for (var i = 0; i < listOfUsers.length; i++) {
-        if(controllerOne.text==listOfUsers[i].login&&controllerTwo.text==listOfUsers[i].password){
-        
-        Navigator.of(context).pushReplacementNamed('/menu');
+        if (controllerOne.text == listOfUsers[i].login &&
+            controllerTwo.text == listOfUsers[i].password) {
+          Navigator.of(context).pushReplacementNamed('/menu');
         }
       }
     });
@@ -116,10 +112,10 @@ class _RegistWidgetState extends State<RegistWidget> {
 }
 
 
-
+//Класс для создания пользвотелей
 class User {
   String login;
   String password;
 
-  User({required this.login,required this.password});
+  User({required this.login, required this.password});
 }

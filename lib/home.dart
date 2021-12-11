@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//Класс для создания новостей
 class News {
   final String title;
   final String inmageName;
@@ -13,7 +14,7 @@ class News {
     required this.descreaption,
   });
 }
-
+//Сипсок новостей
 final List<News> listNews = [
   const News(
       title: 'Mulan Soon',
@@ -40,7 +41,7 @@ final List<News> listNews = [
       descreaption:
           'descreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsak'),
 ];
-
+//Виджет для отображения вкалдки Главная "Home"
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -151,6 +152,7 @@ class _HomeState extends State<Home> {
   }
 }
 
+//Виджет для отображения вкалдок В Главном
 class ViewNewsWidget extends StatelessWidget {
   final int indexFromlist;
   const ViewNewsWidget({Key? key, required this.indexFromlist})

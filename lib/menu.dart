@@ -3,7 +3,7 @@ import 'package:flutter_application_youtube/home.dart';
 import 'package:flutter_application_youtube/popup_button.dart';
 
 import 'films.dart';
-
+//Виджет Главный в приложении
 class Menu extends StatefulWidget {
   const Menu({Key? key}) : super(key: key);
 

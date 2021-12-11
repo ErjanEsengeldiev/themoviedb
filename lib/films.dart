@@ -1,8 +1,8 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_youtube/images.dart';
 
+//Класс для создания фильмов
 class Movie {
   final String title;
   final String inmageName;
@@ -17,7 +17,9 @@ class Movie {
   });
 }
 
+//Список который отображается
 List<Movie> listMovie = [];
+//Список который не отображается
 List<Movie> listMovieForSerch = [
   const Movie(
       title: 'Platform',
@@ -45,6 +47,7 @@ List<Movie> listMovieForSerch = [
           'descreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsak'),
 ];
 
+//Виджет для вкладки Фильмы
 class Films extends StatefulWidget {
   Films({Key? key}) : super(key: key);
 
@@ -57,7 +60,9 @@ class _FilmsState extends State<Films> {
   void setStateForSerch() {
     if (controllerOne.text.isNotEmpty) {
       listMovie = listMovieForSerch.where((Movie movie) {
-        return movie.title.toLowerCase().contains(controllerOne.text.toLowerCase());
+        return movie.title
+            .toLowerCase()
+            .contains(controllerOne.text.toLowerCase());
       }).toList();
     } else {
       listMovie = listMovieForSerch;
@@ -156,6 +161,7 @@ class _FilmsState extends State<Films> {
   }
 }
 
+//Виджет для поиска сверху в стеке
 class SerchWidget extends StatefulWidget {
   const SerchWidget({
     required this.controllerOne,
@@ -172,14 +178,14 @@ class _SerchWidgetState extends State<SerchWidget> {
   Color? forSerching = null;
   String? hintText = null;
   Row? forLable;
-
+//Функция для отображения Поиска
   void _onTabFAB() {
     setState(() {
       enebleForSerch == false ? enebleForSerch = true : enebleForSerch = false;
       forSerching == Colors.black87
           ? forSerching = Colors.transparent
           : forSerching = Colors.black87;
-      widget.controllerOne.clear();
+
       hintText == null ? hintText = 'Serch' : hintText = null;
       forLable == null
           ? forLable = Row(
