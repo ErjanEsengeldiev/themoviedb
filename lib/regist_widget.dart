@@ -27,8 +27,17 @@ class _RegistWidgetState extends State<RegistWidget> {
     });
   }
 
+  bool psswodObscureText = true;
   @override
   Widget build(BuildContext context) {
+    void viewPassword() {
+      setState(() {
+        psswodObscureText == true
+            ? psswodObscureText = false
+            : psswodObscureText = true;
+      });
+    }
+
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(53),
@@ -70,9 +79,14 @@ class _RegistWidgetState extends State<RegistWidget> {
               height: 10,
             ),
             TextField(
+              obscureText: psswodObscureText,
               controller: controllerTwo,
               textAlign: TextAlign.center,
               decoration: InputDecoration(
+                suffixIcon: InkWell(
+                  onTap: viewPassword,
+                  child: const Icon(Icons.remove_red_eye),
+                ),
                 contentPadding: EdgeInsets.zero,
                 enabledBorder: OutlineInputBorder(
                   borderSide: const BorderSide(color: Colors.grey),
@@ -110,7 +124,6 @@ class _RegistWidgetState extends State<RegistWidget> {
     );
   }
 }
-
 
 //Класс для создания пользвотелей
 class User {

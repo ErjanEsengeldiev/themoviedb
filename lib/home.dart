@@ -14,6 +14,7 @@ class News {
     required this.descreaption,
   });
 }
+
 //Сипсок новостей
 final List<News> listNews = [
   const News(
@@ -41,6 +42,7 @@ final List<News> listNews = [
       descreaption:
           'descreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsak'),
 ];
+
 //Виджет для отображения вкалдки Главная "Home"
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -51,6 +53,29 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int? indexFromBuil;
+  //Для Подсчета лайков
+  int likeCount = 0;
+  //что бы знать лкнул ли юсер
+  bool userLiked = false;
+  //Функция Для увелечение лайков
+  void likeNews() {
+    setState(() {
+      userLiked == false ? likeCount++ : likeCount--;
+      userLiked == false ? userLiked = true : userLiked = false;
+    });
+  }
+
+//Для Подсчета Дизлайков
+  int dizLikeCount = 0;
+  //что бы знать лкнул ли юсер
+  bool userDizLiked = false;
+  //Функция Для увелечение лайков
+  void dizLikeNews() {
+    setState(() {
+      userDizLiked == false ? dizLikeCount++ : dizLikeCount--;
+      userDizLiked == false ? userDizLiked = true : userDizLiked = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,24 +86,51 @@ class _HomeState extends State<Home> {
             itemExtent: 500,
             itemBuilder: (BuildContext context, int index) {
               final news = listNews[index];
+              //Для чтения новостей
               void viewNews() {
                 setState(() {
                   Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ViewNewsWidget(
-                              indexFromlist: index,
-                            )),
-                  );
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              ViewNewsWidget(indexFromlist: index)));
                 });
               }
 
-              indexFromBuil = index;
+              //Inkwell для лайков
+              var inkWellForLike = InkWell(
+                onTap: likeNews,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Icon(
+                      Icons.arrow_upward,
+                      color: Colors.lightGreen,
+                    ),
+                    Text('${likeCount.toString()}'),
+                  ],
+                ),
+              );
+              //Inkwell для дизлайков
+              var inkWellForDizlike = InkWell(
+                onTap: dizLikeNews,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Icon(
+                      Icons.arrow_downward,
+                      color: Colors.red,
+                    ),
+                    Text('${dizLikeCount.toString()}'),
+                  ],
+                ),
+              );
               return Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 17, vertical: 10),
                 child: Stack(
                   children: [
+                    //Content Container
                     Container(
                       clipBehavior: Clip.hardEdge,
                       decoration: const BoxDecoration(
@@ -91,43 +143,66 @@ class _HomeState extends State<Home> {
                           )
                         ],
                       ),
+                      //Content
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          
+                          //Заглавное Фото
                           Image(image: AssetImage(news.inmageName)),
                           Center(
-                                  child: Text(
-                                    news.title,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.fade,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
+                            //Заголовок для статьи
+                            child: Text(
+                              news.title,
+                              maxLines: 1,
+                              overflow: TextOverflow.fade,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          //Colimn для Описании, лайков, дизлайков,времени
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Column(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                
+                                //Статья
                                 Text(
                                   news.descreaption,
                                   maxLines: 3,
                                   overflow: TextOverflow.fade,
                                 ),
-                                Container(
-                                  alignment: Alignment.centerRight,
-                                  child: Text(
-                                    news.time,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.fade,
-                                    style:
-                                        const TextStyle(color: Colors.grey),
-                                  ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+
+                                Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        //like
+                                        inkWellForLike,
+                                        //dizLike
+                                        inkWellForDizlike,
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    //Дата публикации
+                                    Container(
+                                      alignment: Alignment.centerRight,
+                                      child: Text(
+                                        news.time,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.fade,
+                                        style:
+                                            const TextStyle(color: Colors.grey),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
@@ -135,11 +210,15 @@ class _HomeState extends State<Home> {
                         ],
                       ),
                     ),
+                    //Следующий слой для анимации и перехода ка статье
                     Material(
-                      child: InkWell(
-                        onTap: viewNews,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(8)),
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * 0.55,
+                        child: InkWell(
+                          onTap: viewNews,
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(8)),
+                        ),
                       ),
                       color: Colors.transparent,
                     ),
@@ -176,8 +255,10 @@ class ViewNewsWidget extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              Image(
-                image: AssetImage(listNews[indexFromlist].inmageName),
+              Container(
+                child: Image(
+                  image: AssetImage(listNews[indexFromlist].inmageName),
+                ),
               ),
               SizedBox(
                 height: 20,
@@ -194,6 +275,8 @@ class ViewNewsWidget extends StatelessWidget {
                           listNews[indexFromlist].descreaption,
                           overflow: TextOverflow.fade,
                         ),
+
+                        //Дата
                         Container(
                           alignment: Alignment.bottomRight,
                           child: Text(
