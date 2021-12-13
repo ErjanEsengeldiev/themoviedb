@@ -54,6 +54,7 @@ class _RegistWidgetState extends State<RegistWidget> {
             const SizedBox(
               height: 20,
             ),
+            //Login
             TextField(
               controller: controllerOne,
               textAlign: TextAlign.center,
@@ -75,14 +76,21 @@ class _RegistWidgetState extends State<RegistWidget> {
                 ),
               ),
             ),
+
             const SizedBox(
               height: 10,
             ),
+            //Password
             TextField(
               obscureText: psswodObscureText,
               controller: controllerTwo,
               textAlign: TextAlign.center,
               decoration: InputDecoration(
+                //что бы текст по середине стал
+                prefixIcon: const Icon(
+                  Icons.remove_red_eye,
+                  color: Colors.transparent,
+                ),
                 suffixIcon: InkWell(
                   onTap: viewPassword,
                   child: const Icon(Icons.remove_red_eye),
@@ -107,12 +115,13 @@ class _RegistWidgetState extends State<RegistWidget> {
             const SizedBox(
               height: 10,
             ),
+            //Sing in
             ElevatedButton(
               onPressed: _login,
               child: Container(
                 alignment: Alignment.center,
                 height: 55,
-                child: Text('Login'),
+                child: Text('Sing in'),
               ),
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.cyan),
