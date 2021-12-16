@@ -2,12 +2,20 @@ import 'package:flutter/material.dart';
 
 //Класс для создания новостей
 class News {
+  bool userDizLiked;
+  bool userLiked;
+  final int dizLike;
+  final int like;
   final String title;
   final String inmageName;
   final String time;
   final String descreaption;
 
-  const News({
+  News({
+    required this.userDizLiked,
+    required this.userLiked,
+    required this.like,
+    required this.dizLike,
     required this.title,
     required this.inmageName,
     required this.time,
@@ -17,25 +25,41 @@ class News {
 
 //Сипсок новостей
 final List<News> listNews = [
-  const News(
+  News(
+      userDizLiked: false,
+      userLiked: false,
+      like: 0,
+      dizLike: 0,
       title: 'Mulan Soon',
       inmageName: 'images/Mulan.jpeg',
       time: '04.12.2021',
       descreaption:
           'descreaptionfsafdsaffsddescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdhfjkasdhfkdescreaptionfsafdsaffsddescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdescreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsakdhfjkasdhfkjshadlfhsadlfhsakjshadlfhsadlfhsak'),
-  const News(
+  News(
+      userDizLiked: false,
+      userLiked: false,
+      like: 0,
+      dizLike: 0,
       title: 'About Scarlet and Tors Relationship',
       inmageName: 'images/Avabgers.jpeg',
       time: '04.12.2021',
       descreaption:
           'descreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsak'),
-  const News(
+  News(
+      userDizLiked: false,
+      userLiked: false,
+      like: 0,
+      dizLike: 0,
       title: 'Titanik',
       inmageName: 'images/FilmNews.jpeg',
       time: '04.12.2021',
       descreaption:
           'descreaptionfsafdsaffsdhfhsadkjfhaslkjdhfjkasdhfkjshadlfhsadlfhsak'),
-  const News(
+  News(
+      userDizLiked: false,
+      userLiked: false,
+      like: 0,
+      dizLike: 0,
       title: 'Kill Bill',
       inmageName: 'images/image.jpeg',
       time: '04.12.2021',
@@ -53,89 +77,101 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int? indexFromBuil;
-  //Для Подсчета лайков
-  int likeCount = 0;
-  //что бы знать лкнул ли юсер
-  bool userLiked = false;
-  //Функция Для увелечение лайков
-  void likeNews() {
-    setState(() {
-      userLiked == false ? likeCount++ : likeCount--;
-      userLiked == false ? userLiked = true : userLiked = false;
-    });
-  }
-
-//Для Подсчета Дизлайков
-  int dizLikeCount = 0;
-  //что бы знать лкнул ли юсер
-  bool userDizLiked = false;
-  //Функция Для увелечение лайков
-  void dizLikeNews() {
-    setState(() {
-      userDizLiked == false ? dizLikeCount++ : dizLikeCount--;
-      userDizLiked == false ? userDizLiked = true : userDizLiked = false;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        ListView.builder(
-            itemCount: listNews.length,
-            itemExtent: 500,
-            itemBuilder: (BuildContext context, int index) {
-              final news = listNews[index];
-              //Для чтения новостей
-              void viewNews() {
-                setState(() {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              ViewNewsWidget(indexFromlist: index)));
-                });
-              }
+    return ListView.builder(
+        itemCount: listNews.length,
+        itemExtent: 370,
+        itemBuilder: (BuildContext context, int index) {
+          final news = listNews[index];
+          //Функция Для увелечение лайков
+          likeNews(int index) {
+            listNews[index].userLiked == false
+                ? listNews[index].like + 1
+                : listNews[index].like - 1;
+            listNews[index].userLiked == false
+                ? listNews[index].userLiked = true
+                : listNews[index].userLiked = false;
+          }
 
-              //Inkwell для лайков
-              var inkWellForLike = InkWell(
-                onTap: likeNews,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+          //Функция Для увелечение лайков
+          dizLikeNews(int index) {
+            listNews[index].userDizLiked == false
+                ? listNews[index].dizLike + 1
+                : listNews[index].dizLike - 1;
+            listNews[index].userDizLiked == false
+                ? listNews[index].userDizLiked = true
+                : listNews[index].userDizLiked = false;
+          }
+
+          //Для чтения новостей
+          void viewNews() {
+            setState(() {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          ViewNewsWidget(indexFromlist: index)));
+            });
+          }
+
+          //Inkwell для лайков
+          var inkWellForLike = InkWell(
+            splashColor: Colors.green,
+            onTap: likeNews(index),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.green),
+                  borderRadius: const BorderRadius.all(Radius.circular(5))),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  const Icon(
+                    Icons.arrow_upward,
+                    color: Colors.lightGreen,
+                  ),
+                  Text(listNews[index].like.toString()),
+                ],
+              ),
+            ),
+          );
+          //Inkwell для дизлайков
+          var inkWellForDizlike = InkWell(
+            splashColor: Colors.red,
+            onTap: dizLikeNews(index),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.red),
+                  borderRadius: const BorderRadius.all(Radius.circular(5))),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  const Icon(
+                    Icons.arrow_downward,
+                    color: Colors.red,
+                  ),
+                  Text(listNews[index].dizLike.toString()),
+                ],
+              ),
+            ),
+          );
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 10),
+            child: Column(
+              children: [
+                Stack(
                   children: [
-                    Icon(
-                      Icons.arrow_upward,
-                      color: Colors.lightGreen,
-                    ),
-                    Text('${likeCount.toString()}'),
-                  ],
-                ),
-              );
-              //Inkwell для дизлайков
-              var inkWellForDizlike = InkWell(
-                onTap: dizLikeNews,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Icon(
-                      Icons.arrow_downward,
-                      color: Colors.red,
-                    ),
-                    Text('${dizLikeCount.toString()}'),
-                  ],
-                ),
-              );
-              return Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 17, vertical: 10),
-                child: Stack(
-                  children: [
-                    //Content Container
                     Container(
+                      height: 300,
                       clipBehavior: Clip.hardEdge,
                       decoration: const BoxDecoration(
                         color: Colors.black,
-                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(4),
+                            topRight: Radius.circular(4)),
                         boxShadow: [
                           BoxShadow(
                             blurRadius: 8,
@@ -147,8 +183,13 @@ class _HomeState extends State<Home> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          //Заглавное Фото
-                          Image(image: AssetImage(news.inmageName)),
+                          //ImgeForNews
+                          Image(
+                            image: AssetImage(news.inmageName),
+                            width: 300,
+                            height: 150,
+                            fit: BoxFit.cover,
+                          ),
                           Center(
                             //Заголовок для статьи
                             child: Text(
@@ -160,7 +201,7 @@ class _HomeState extends State<Home> {
                               ),
                             ),
                           ),
-                          //Colimn для Описании, лайков, дизлайков,времени
+                          //Column для Описании, лайков, дизлайков,времени
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Column(
@@ -173,36 +214,20 @@ class _HomeState extends State<Home> {
                                   maxLines: 3,
                                   overflow: TextOverflow.fade,
                                 ),
-                                SizedBox(
+
+                                const SizedBox(
                                   height: 10,
                                 ),
 
-                                Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        //like
-                                        inkWellForLike,
-                                        //dizLike
-                                        inkWellForDizlike,
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    //Дата публикации
-                                    Container(
-                                      alignment: Alignment.centerRight,
-                                      child: Text(
-                                        news.time,
-                                        maxLines: 1,
-                                        overflow: TextOverflow.fade,
-                                        style:
-                                            const TextStyle(color: Colors.grey),
-                                      ),
-                                    ),
-                                  ],
+                                //Дата публикации
+                                Container(
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    news.time,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.fade,
+                                    style: const TextStyle(color: Colors.grey),
+                                  ),
                                 ),
                               ],
                             ),
@@ -211,23 +236,40 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     //Следующий слой для анимации и перехода ка статье
-                    Material(
-                      child: Container(
-                        height: MediaQuery.of(context).size.height * 0.55,
+                    SizedBox(
+                      height: 300,
+                      child: Material(
                         child: InkWell(
                           onTap: viewNews,
                           borderRadius:
                               const BorderRadius.all(Radius.circular(8)),
                         ),
+                        color: Colors.transparent,
                       ),
-                      color: Colors.transparent,
                     ),
                   ],
                 ),
-              );
-            }),
-      ],
-    );
+                //For like,Dizlike
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 5),
+                  decoration: const BoxDecoration(color: Colors.transparent),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      //like
+                      inkWellForLike,
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      //dizLike
+                      inkWellForDizlike,
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
+        });
   }
 }
 

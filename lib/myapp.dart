@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
         ),
       ),
       routes: <String, WidgetBuilder>{
-        '/regist': (context) => RegistWidget(),
-        '/menu': (context) => Menu(),
+        '/regist': (context) => const RegistWidget(),
+        '/menu': (context) => const Menu(),
       },
     );
   }
