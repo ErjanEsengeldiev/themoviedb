@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_youtube/home.dart';
+import 'package:flutter_application_youtube/main_widgets/menu/home_widgets/home.dart';
 import 'package:flutter_application_youtube/popup_button.dart';
+import 'film_widgets/films.dart';
 
-import 'films.dart';
 //Виджет Главный в приложении
 class Menu extends StatefulWidget {
   const Menu({Key? key}) : super(key: key);
@@ -13,7 +13,7 @@ class Menu extends StatefulWidget {
 
 class _MenuState extends State<Menu> {
   final List<Widget> _widgetOptions = [
-    Home(),
+    const Home(),
     Films(),
   ];
 
@@ -28,13 +28,14 @@ class _MenuState extends State<Menu> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Name of Project'),
+        title: const Text('Name of Project'),
         centerTitle: true,
-        actions: [
+        actions: const [
           PoupButtonForMenu(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.grey,
         onTap: _currentIndexFunc,
         currentIndex: _currentIndex,
         items: const [
@@ -55,3 +56,16 @@ class _MenuState extends State<Menu> {
   }
 }
 
+class InheritForChengeTheme extends InheritedWidget {
+  final ColorScheme themeForApp;
+  // ignore: use_key_in_widget_constructors
+  const InheritForChengeTheme({
+    required this.themeForApp,
+    required Widget child,
+  }) : super(child: child);
+
+  @override
+  bool updateShouldNotify(covariant InheritForChengeTheme oldWidget) {
+    return themeForApp != oldWidget.themeForApp;
+  }
+}

@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 
 //Класс для создания фильмов
@@ -108,7 +106,12 @@ class _FilmsState extends State<Films> {
                       ),
                       child: Row(
                         children: [
-                          Image(image: AssetImage(movie.inmageName)),
+                          Image(
+                            image: AssetImage(movie.inmageName),
+                            width: 150,
+                            height: 300,
+                            fit: BoxFit.cover,
+                          ),
                           const SizedBox(
                             width: 15,
                           ),
